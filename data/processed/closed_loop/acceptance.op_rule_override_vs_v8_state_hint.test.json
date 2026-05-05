@@ -1,0 +1,64 @@
+{
+  "checked": 6,
+  "large_regressions": [
+    "overall.next_action_success",
+    "retail.next_action_success",
+    "overall.tool_exact_match",
+    "retail.tool_exact_match",
+    "overall.predicted_action_execution_ok"
+  ],
+  "passed": false,
+  "rows": [
+    {
+      "baseline": 0.7357142857142858,
+      "candidate": 0.7142857142857143,
+      "delta": -0.021428571428571463,
+      "metric": "overall.next_action_success",
+      "status": "regress"
+    },
+    {
+      "baseline": 0.5194805194805194,
+      "candidate": 0.4805194805194805,
+      "delta": -0.03896103896103892,
+      "metric": "retail.next_action_success",
+      "status": "regress"
+    },
+    {
+      "baseline": 0.7428571428571429,
+      "candidate": 0.7214285714285714,
+      "delta": -0.021428571428571463,
+      "metric": "overall.tool_exact_match",
+      "status": "regress"
+    },
+    {
+      "baseline": 0.5324675324675324,
+      "candidate": 0.4935064935064935,
+      "delta": -0.03896103896103892,
+      "metric": "retail.tool_exact_match",
+      "status": "regress"
+    },
+    {
+      "baseline": 0.9619047619047619,
+      "candidate": 0.8666666666666667,
+      "delta": -0.09523809523809523,
+      "metric": "overall.predicted_action_execution_ok",
+      "status": "regress"
+    },
+    {
+      "baseline": 0.5612648221343873,
+      "candidate": 0.6086956521739131,
+      "delta": 0.04743083003952575,
+      "metric": "overall.argument_value_exact_match",
+      "status": "win"
+    }
+  ],
+  "safety_failures": [
+    {
+      "candidate": 0.8666666666666667,
+      "metric": "overall.predicted_action_execution_ok",
+      "threshold": 0.9
+    }
+  ],
+  "ties": 0,
+  "wins": 1
+}

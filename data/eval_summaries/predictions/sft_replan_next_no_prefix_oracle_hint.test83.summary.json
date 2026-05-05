@@ -1,0 +1,74 @@
+{
+  "adapter_dir": "outputs/conditioned_sft/replan_next_no_prefix_lora_v1_full/final",
+  "by_domain": {
+    "retail": {
+      "argument_task_count": 20,
+      "avg_argument_key_precision": 0.8986928104575164,
+      "avg_argument_key_recall": 0.6833333333333333,
+      "avg_argument_value_exact_match": 0.5452380952380952,
+      "avg_gold_tool_count": 1.0,
+      "avg_predicted_tool_count": 0.85,
+      "avg_tool_edit_distance": 0.15,
+      "count": 20,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.85,
+      "tool_exact_match": 0.85,
+      "valid_available_tool_rate": 1.0
+    },
+    "telecom": {
+      "argument_task_count": 28,
+      "avg_argument_key_precision": 1.0,
+      "avg_argument_key_recall": 1.0,
+      "avg_argument_value_exact_match": 1.0,
+      "avg_gold_tool_count": 0.4444444444444444,
+      "avg_predicted_tool_count": 0.4444444444444444,
+      "avg_tool_edit_distance": 0.0,
+      "count": 63,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 1.0,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "by_source": {
+    "tau2": {
+      "argument_task_count": 48,
+      "avg_argument_key_precision": 0.9617283950617284,
+      "avg_argument_key_recall": 0.8680555555555555,
+      "avg_argument_value_exact_match": 0.8105158730158731,
+      "avg_gold_tool_count": 0.5783132530120482,
+      "avg_predicted_tool_count": 0.5421686746987951,
+      "avg_tool_edit_distance": 0.03614457831325301,
+      "count": 83,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.963855421686747,
+      "tool_exact_match": 0.963855421686747,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "latent_key": null,
+  "limit": 0,
+  "model_name": "sft_replan_next_no_prefix_oracle_hint",
+  "overall": {
+    "argument_task_count": 48,
+    "avg_argument_key_precision": 0.9617283950617284,
+    "avg_argument_key_recall": 0.8680555555555555,
+    "avg_argument_value_exact_match": 0.8105158730158731,
+    "avg_gold_tool_count": 0.5783132530120482,
+    "avg_predicted_tool_count": 0.5421686746987951,
+    "avg_tool_edit_distance": 0.03614457831325301,
+    "count": 83,
+    "json_parse_rate": 1.0,
+    "schema_action_rate": 1.0,
+    "stop_exact_match": 0.963855421686747,
+    "tool_exact_match": 0.963855421686747,
+    "valid_available_tool_rate": 1.0
+  },
+  "planner_hint": "gold_next_tool",
+  "projector_gate": null,
+  "projector_gate_logit": null,
+  "projector_path": null
+}

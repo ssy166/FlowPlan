@@ -1,0 +1,52 @@
+{
+  "checked": 6,
+  "large_regressions": [],
+  "passed": true,
+  "rows": [
+    {
+      "baseline": 0.6571428571428571,
+      "candidate": 0.7142857142857143,
+      "delta": 0.05714285714285716,
+      "metric": "overall.next_action_success",
+      "status": "win"
+    },
+    {
+      "baseline": 0.37662337662337664,
+      "candidate": 0.4805194805194805,
+      "delta": 0.10389610389610388,
+      "metric": "retail.next_action_success",
+      "status": "win"
+    },
+    {
+      "baseline": 0.6714285714285714,
+      "candidate": 0.7214285714285714,
+      "delta": 0.050000000000000044,
+      "metric": "overall.tool_exact_match",
+      "status": "win"
+    },
+    {
+      "baseline": 0.4025974025974026,
+      "candidate": 0.4935064935064935,
+      "delta": 0.09090909090909088,
+      "metric": "retail.tool_exact_match",
+      "status": "win"
+    },
+    {
+      "baseline": 0.926829268292683,
+      "candidate": 0.9583333333333334,
+      "delta": 0.0315040650406504,
+      "metric": "overall.predicted_action_execution_ok",
+      "status": "win"
+    },
+    {
+      "baseline": 0.43873517786561267,
+      "candidate": 0.5335968379446641,
+      "delta": 0.09486166007905139,
+      "metric": "overall.argument_value_exact_match",
+      "status": "win"
+    }
+  ],
+  "safety_failures": [],
+  "ties": 0,
+  "wins": 6
+}

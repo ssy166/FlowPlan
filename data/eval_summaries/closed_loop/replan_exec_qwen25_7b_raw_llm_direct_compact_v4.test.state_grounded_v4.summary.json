@@ -1,0 +1,79 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 74,
+      "action_success": 0.22972972972972974,
+      "action_tool_exact_match": 0.24324324324324326,
+      "argument_key_precision": 0.3466135458167331,
+      "argument_key_recall": 0.4416243654822335,
+      "argument_value_exact_match": 0.26903553299492383,
+      "count": 77,
+      "next_action_success": 0.22077922077922077,
+      "predicted_action_count": 73,
+      "predicted_action_execution_ok": 0.8904109589041096,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.9090909090909091,
+      "stop_rows": 3,
+      "stop_success": 0.0,
+      "tool_exact_match": 0.23376623376623376
+    },
+    "telecom": {
+      "action_rows": 28,
+      "action_success": 0.0,
+      "action_tool_exact_match": 0.0,
+      "argument_key_precision": 0.45528455284552843,
+      "argument_key_recall": 1.0,
+      "argument_value_exact_match": 1.0,
+      "count": 63,
+      "next_action_success": 0.0,
+      "predicted_action_count": 63,
+      "predicted_action_execution_ok": 1.0,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.4444444444444444,
+      "stop_rows": 35,
+      "stop_success": 0.0,
+      "tool_exact_match": 0.0
+    }
+  },
+  "by_prediction_type": {
+    "model_qwen25_7b_raw_llm_direct_compact_v4": {
+      "action_rows": 102,
+      "action_success": 0.16666666666666666,
+      "action_tool_exact_match": 0.17647058823529413,
+      "argument_key_precision": 0.38235294117647056,
+      "argument_key_recall": 0.5652173913043478,
+      "argument_value_exact_match": 0.4308300395256917,
+      "count": 140,
+      "next_action_success": 0.12142857142857143,
+      "predicted_action_count": 136,
+      "predicted_action_execution_ok": 0.9411764705882353,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.7,
+      "stop_rows": 38,
+      "stop_success": 0.0,
+      "tool_exact_match": 0.12857142857142856
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next_mixed_retail_gold_v4_compact_noprior/test.jsonl",
+  "domain": "all",
+  "limit": 0,
+  "overall": {
+    "action_rows": 102,
+    "action_success": 0.16666666666666666,
+    "action_tool_exact_match": 0.17647058823529413,
+    "argument_key_precision": 0.38235294117647056,
+    "argument_key_recall": 0.5652173913043478,
+    "argument_value_exact_match": 0.4308300395256917,
+    "count": 140,
+    "next_action_success": 0.12142857142857143,
+    "predicted_action_count": 136,
+    "predicted_action_execution_ok": 0.9411764705882353,
+    "replay_execution_ok": 1.0,
+    "stop_exact_match": 0.7,
+    "stop_rows": 38,
+    "stop_success": 0.0,
+    "tool_exact_match": 0.12857142857142856
+  },
+  "pred": "data/processed/predictions/qwen25_7b_raw_llm_direct_compact_v4.test.state_grounded_v4.jsonl",
+  "result_grounding": true
+}

@@ -1,0 +1,75 @@
+{
+  "adapter_dir": "outputs/conditioned_sft/replan_next_prefix_yhat_lora_v1_full/final",
+  "by_domain": {
+    "retail": {
+      "argument_task_count": 20,
+      "avg_argument_key_precision": 0.55,
+      "avg_argument_key_recall": 0.5214285714285714,
+      "avg_argument_value_exact_match": 0.4404761904761904,
+      "avg_gold_tool_count": 1.0,
+      "avg_predicted_tool_count": 1.0,
+      "avg_tool_edit_distance": 0.5,
+      "count": 20,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 0.5,
+      "valid_available_tool_rate": 1.0
+    },
+    "telecom": {
+      "argument_task_count": 28,
+      "avg_argument_key_precision": 1.0,
+      "avg_argument_key_recall": 1.0,
+      "avg_argument_value_exact_match": 1.0,
+      "avg_gold_tool_count": 0.4444444444444444,
+      "avg_predicted_tool_count": 0.4444444444444444,
+      "avg_tool_edit_distance": 0.0,
+      "count": 63,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 1.0,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "by_source": {
+    "tau2": {
+      "argument_task_count": 48,
+      "avg_argument_key_precision": 0.8125000000000001,
+      "avg_argument_key_recall": 0.8005952380952382,
+      "avg_argument_value_exact_match": 0.7668650793650795,
+      "avg_gold_tool_count": 0.5783132530120482,
+      "avg_predicted_tool_count": 0.5783132530120482,
+      "avg_tool_edit_distance": 0.12048192771084337,
+      "count": 83,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 0.8795180722891566,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "latent_key": "y_hat",
+  "limit": 0,
+  "model_name": "sft_replan_next_prefix_yhat_v4_fm_text_hint_v2",
+  "overall": {
+    "argument_task_count": 48,
+    "avg_argument_key_precision": 0.8125000000000001,
+    "avg_argument_key_recall": 0.8005952380952382,
+    "avg_argument_value_exact_match": 0.7668650793650795,
+    "avg_gold_tool_count": 0.5783132530120482,
+    "avg_predicted_tool_count": 0.5783132530120482,
+    "avg_tool_edit_distance": 0.12048192771084337,
+    "count": 83,
+    "json_parse_rate": 1.0,
+    "schema_action_rate": 1.0,
+    "stop_exact_match": 1.0,
+    "tool_exact_match": 0.8795180722891566,
+    "valid_available_tool_rate": 1.0
+  },
+  "planner_hint": "prediction_next_tool",
+  "planner_hint_predictions": "outputs/fm_replan/next_tool_prior_v2_yhat_v4/test.pred.jsonl",
+  "projector_gate": 0.269089937210083,
+  "projector_gate_logit": -0.999244749546051,
+  "projector_path": "outputs/conditioned_sft/replan_next_prefix_yhat_lora_v1_full/final/fm_prefix_projector.pt"
+}

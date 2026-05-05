@@ -1,0 +1,79 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 74,
+      "action_success": 0.0,
+      "action_tool_exact_match": 0.0,
+      "argument_key_precision": null,
+      "argument_key_recall": 0.0,
+      "argument_value_exact_match": 0.0,
+      "count": 77,
+      "next_action_success": 0.03896103896103896,
+      "predicted_action_count": 0,
+      "predicted_action_execution_ok": null,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.03896103896103896,
+      "stop_rows": 3,
+      "stop_success": 1.0,
+      "tool_exact_match": 0.03896103896103896
+    },
+    "telecom": {
+      "action_rows": 28,
+      "action_success": 0.0,
+      "action_tool_exact_match": 0.0,
+      "argument_key_precision": null,
+      "argument_key_recall": 0.0,
+      "argument_value_exact_match": 0.0,
+      "count": 63,
+      "next_action_success": 0.5555555555555556,
+      "predicted_action_count": 0,
+      "predicted_action_execution_ok": null,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.5555555555555556,
+      "stop_rows": 35,
+      "stop_success": 1.0,
+      "tool_exact_match": 0.5555555555555556
+    }
+  },
+  "by_prediction_type": {
+    "baseline_always_stop": {
+      "action_rows": 102,
+      "action_success": 0.0,
+      "action_tool_exact_match": 0.0,
+      "argument_key_precision": null,
+      "argument_key_recall": 0.0,
+      "argument_value_exact_match": 0.0,
+      "count": 140,
+      "next_action_success": 0.2714285714285714,
+      "predicted_action_count": 0,
+      "predicted_action_execution_ok": null,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.2714285714285714,
+      "stop_rows": 38,
+      "stop_success": 1.0,
+      "tool_exact_match": 0.2714285714285714
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next_mixed_retail_gold_v4_compact_noprior_ci_state_hint_v1/test.jsonl",
+  "domain": "all",
+  "limit": 0,
+  "overall": {
+    "action_rows": 102,
+    "action_success": 0.0,
+    "action_tool_exact_match": 0.0,
+    "argument_key_precision": null,
+    "argument_key_recall": 0.0,
+    "argument_value_exact_match": 0.0,
+    "count": 140,
+    "next_action_success": 0.2714285714285714,
+    "predicted_action_count": 0,
+    "predicted_action_execution_ok": null,
+    "replay_execution_ok": 1.0,
+    "stop_exact_match": 0.2714285714285714,
+    "stop_rows": 38,
+    "stop_success": 1.0,
+    "tool_exact_match": 0.2714285714285714
+  },
+  "pred": "data/processed/predictions/replan_light_baselines_compact_v4/baseline_always_stop.test.state_grounded_v4.jsonl",
+  "result_grounding": true
+}

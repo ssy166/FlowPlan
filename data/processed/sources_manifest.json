@@ -1,0 +1,58 @@
+{
+  "outputs": {
+    "tools": "data/processed/tools.jsonl",
+    "tasks": "data/processed/tasks.jsonl",
+    "gold_plans": "data/processed/gold_plans.jsonl",
+    "task_splits": {
+      "train": "data/processed/task_splits/train.txt",
+      "dev": "data/processed/task_splits/dev.txt",
+      "test": "data/processed/task_splits/test.txt"
+    }
+  },
+  "counts": {
+    "tools": 3930,
+    "tasks": 6865,
+    "gold_plans": 6865,
+    "tool_phases": {
+      "retrieve": 2235,
+      "compute": 66,
+      "operate": 219,
+      "verify": 507,
+      "other": 834,
+      "create": 69
+    },
+    "tool_splits": {
+      "test_unseen": 599,
+      "dev_seen": 606,
+      "train_seen": 2725
+    },
+    "task_splits": {
+      "train": 4867,
+      "test": 1026,
+      "dev": 972
+    }
+  },
+  "sources": {
+    "tau2-bench": {
+      "raw_path": "data\\raw\\tau2-bench",
+      "present": true
+    },
+    "api-bank": {
+      "raw_path": "data\\raw\\api-bank",
+      "present": true
+    },
+    "toolbench": {
+      "raw_path": "data\\raw\\toolbench",
+      "present": true
+    },
+    "gta": {
+      "raw_path": "data\\raw\\gta",
+      "present": true
+    }
+  },
+  "notes": [
+    "Seed index only; raw files remain authoritative.",
+    "Phase labels and seen/unseen tool splits are heuristic and embedded in JSONL rows.",
+    "Task split files contain task ids only; task rows are not duplicated."
+  ]
+}

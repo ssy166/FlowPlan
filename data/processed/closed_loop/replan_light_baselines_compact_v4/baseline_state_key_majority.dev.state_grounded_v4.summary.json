@@ -1,0 +1,79 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 49,
+      "action_success": 0.42857142857142855,
+      "action_tool_exact_match": 0.4897959183673469,
+      "argument_key_precision": 0.4772727272727273,
+      "argument_key_recall": 0.40384615384615385,
+      "argument_value_exact_match": 0.25961538461538464,
+      "count": 53,
+      "next_action_success": 0.41509433962264153,
+      "predicted_action_count": 52,
+      "predicted_action_execution_ok": 0.8076923076923077,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.9433962264150944,
+      "stop_rows": 4,
+      "stop_success": 0.25,
+      "tool_exact_match": 0.4716981132075472
+    },
+    "telecom": {
+      "action_rows": 38,
+      "action_success": 0.0,
+      "action_tool_exact_match": 1.0,
+      "argument_key_precision": null,
+      "argument_key_recall": 0.0,
+      "argument_value_exact_match": 0.0,
+      "count": 68,
+      "next_action_success": 0.4411764705882353,
+      "predicted_action_count": 38,
+      "predicted_action_execution_ok": 0.0,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 30,
+      "stop_success": 1.0,
+      "tool_exact_match": 1.0
+    }
+  },
+  "by_prediction_type": {
+    "baseline_state_key_majority": {
+      "action_rows": 87,
+      "action_success": 0.2413793103448276,
+      "action_tool_exact_match": 0.7126436781609196,
+      "argument_key_precision": 0.4772727272727273,
+      "argument_key_recall": 0.23333333333333334,
+      "argument_value_exact_match": 0.15,
+      "count": 121,
+      "next_action_success": 0.4297520661157025,
+      "predicted_action_count": 90,
+      "predicted_action_execution_ok": 0.4666666666666667,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 0.9752066115702479,
+      "stop_rows": 34,
+      "stop_success": 0.9117647058823529,
+      "tool_exact_match": 0.768595041322314
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next_mixed_retail_gold_v4_compact_noprior_ci_state_hint_v1/dev.jsonl",
+  "domain": "all",
+  "limit": 0,
+  "overall": {
+    "action_rows": 87,
+    "action_success": 0.2413793103448276,
+    "action_tool_exact_match": 0.7126436781609196,
+    "argument_key_precision": 0.4772727272727273,
+    "argument_key_recall": 0.23333333333333334,
+    "argument_value_exact_match": 0.15,
+    "count": 121,
+    "next_action_success": 0.4297520661157025,
+    "predicted_action_count": 90,
+    "predicted_action_execution_ok": 0.4666666666666667,
+    "replay_execution_ok": 1.0,
+    "stop_exact_match": 0.9752066115702479,
+    "stop_rows": 34,
+    "stop_success": 0.9117647058823529,
+    "tool_exact_match": 0.768595041322314
+  },
+  "pred": "data/processed/predictions/replan_light_baselines_compact_v4/baseline_state_key_majority.dev.state_grounded_v4.jsonl",
+  "result_grounding": true
+}

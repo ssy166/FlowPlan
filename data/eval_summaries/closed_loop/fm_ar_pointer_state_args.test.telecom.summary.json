@@ -1,0 +1,11 @@
+{
+  "count": 100,
+  "full_tool_match": 0.37,
+  "first_tool_match": 0.72,
+  "avg_prefix_tool_match_length": 1.09,
+  "needs_replan_rate": 0.63,
+  "pred": "data\\processed\\predictions\\fm_ar_pointer_decoder_v1.test.state_args.jsonl",
+  "source": "tau2",
+  "domain": "telecom",
+  "limit": 100
+}

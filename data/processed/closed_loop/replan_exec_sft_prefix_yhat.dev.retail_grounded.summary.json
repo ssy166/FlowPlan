@@ -1,0 +1,62 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 17,
+      "action_success": 0.29411764705882354,
+      "action_tool_exact_match": 0.35294117647058826,
+      "argument_key_precision": 0.41304347826086957,
+      "argument_key_recall": 0.37254901960784315,
+      "argument_value_exact_match": 0.3333333333333333,
+      "count": 17,
+      "next_action_success": 0.29411764705882354,
+      "predicted_action_count": 17,
+      "predicted_action_execution_ok": 0.8823529411764706,
+      "replay_execution_ok": 0.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 0,
+      "stop_success": null,
+      "tool_exact_match": 0.35294117647058826
+    }
+  },
+  "by_prediction_type": {
+    "model_sft_replan_next_prefix_yhat_full": {
+      "action_rows": 17,
+      "action_success": 0.29411764705882354,
+      "action_tool_exact_match": 0.35294117647058826,
+      "argument_key_precision": 0.41304347826086957,
+      "argument_key_recall": 0.37254901960784315,
+      "argument_value_exact_match": 0.3333333333333333,
+      "count": 17,
+      "next_action_success": 0.29411764705882354,
+      "predicted_action_count": 17,
+      "predicted_action_execution_ok": 0.8823529411764706,
+      "replay_execution_ok": 0.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 0,
+      "stop_success": null,
+      "tool_exact_match": 0.35294117647058826
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next/dev.jsonl",
+  "domain": "retail",
+  "limit": 0,
+  "overall": {
+    "action_rows": 17,
+    "action_success": 0.29411764705882354,
+    "action_tool_exact_match": 0.35294117647058826,
+    "argument_key_precision": 0.41304347826086957,
+    "argument_key_recall": 0.37254901960784315,
+    "argument_value_exact_match": 0.3333333333333333,
+    "count": 17,
+    "next_action_success": 0.29411764705882354,
+    "predicted_action_count": 17,
+    "predicted_action_execution_ok": 0.8823529411764706,
+    "replay_execution_ok": 0.0,
+    "stop_exact_match": 1.0,
+    "stop_rows": 0,
+    "stop_success": null,
+    "tool_exact_match": 0.35294117647058826
+  },
+  "pred": "data/processed/predictions/sft_replan_next_prefix_yhat_full.dev85.pred.jsonl",
+  "result_grounding": true
+}

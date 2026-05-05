@@ -1,0 +1,62 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 20,
+      "action_success": 0.35,
+      "action_tool_exact_match": 0.45,
+      "argument_key_precision": 0.5373134328358209,
+      "argument_key_recall": 0.5,
+      "argument_value_exact_match": 0.375,
+      "count": 20,
+      "next_action_success": 0.35,
+      "predicted_action_count": 20,
+      "predicted_action_execution_ok": 0.7,
+      "replay_execution_ok": 0.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 0,
+      "stop_success": null,
+      "tool_exact_match": 0.45
+    }
+  },
+  "by_prediction_type": {
+    "model_sft_replan_next_no_prefix_full": {
+      "action_rows": 20,
+      "action_success": 0.35,
+      "action_tool_exact_match": 0.45,
+      "argument_key_precision": 0.5373134328358209,
+      "argument_key_recall": 0.5,
+      "argument_value_exact_match": 0.375,
+      "count": 20,
+      "next_action_success": 0.35,
+      "predicted_action_count": 20,
+      "predicted_action_execution_ok": 0.7,
+      "replay_execution_ok": 0.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 0,
+      "stop_success": null,
+      "tool_exact_match": 0.45
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next/test.jsonl",
+  "domain": "retail",
+  "limit": 0,
+  "overall": {
+    "action_rows": 20,
+    "action_success": 0.35,
+    "action_tool_exact_match": 0.45,
+    "argument_key_precision": 0.5373134328358209,
+    "argument_key_recall": 0.5,
+    "argument_value_exact_match": 0.375,
+    "count": 20,
+    "next_action_success": 0.35,
+    "predicted_action_count": 20,
+    "predicted_action_execution_ok": 0.7,
+    "replay_execution_ok": 0.0,
+    "stop_exact_match": 1.0,
+    "stop_rows": 0,
+    "stop_success": null,
+    "tool_exact_match": 0.45
+  },
+  "pred": "data/processed/predictions/sft_replan_next_no_prefix_full.test83.pred.jsonl",
+  "result_grounding": true
+}

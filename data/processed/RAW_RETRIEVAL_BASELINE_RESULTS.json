@@ -1,0 +1,42 @@
+[
+  {
+    "arg_value_em": 0.4308300395256917,
+    "overall_success": 0.12142857142857143,
+    "pred_exec_ok": 0.9411764705882353,
+    "retail_success": 0.22077922077922077,
+    "retail_tool_em": 0.23376623376623376,
+    "summary": "data/processed/closed_loop/replan_exec_qwen25_7b_raw_llm_direct_compact_v4.test.state_grounded_v4.summary.json",
+    "tag": "qwen25_7b_raw_llm_direct_compact_v4",
+    "tool_em": 0.12857142857142856
+  },
+  {
+    "arg_value_em": 0.13043478260869565,
+    "overall_success": 0.22142857142857142,
+    "pred_exec_ok": 0.8405797101449275,
+    "retail_success": 0.09090909090909091,
+    "retail_tool_em": 0.1038961038961039,
+    "summary": "data/processed/closed_loop/replan_exec_llama32_3b_raw_llm_direct_compact_v4.test.state_grounded_v4.summary.json",
+    "tag": "llama32_3b_raw_llm_direct_compact_v4",
+    "tool_em": 0.22857142857142856
+  },
+  {
+    "arg_value_em": 0.34782608695652173,
+    "overall_success": 0.5214285714285715,
+    "pred_exec_ok": 1.0,
+    "retail_success": 0.4935064935064935,
+    "retail_tool_em": 0.4935064935064935,
+    "summary": "data/processed/closed_loop/replan_exec_qwen25_7b_retrieval_aug_executor_compact_v4.test.state_grounded_v4.summary.json",
+    "tag": "qwen25_7b_retrieval_aug_executor_compact_v4",
+    "tool_em": 0.5214285714285715
+  },
+  {
+    "arg_value_em": 0.3241106719367589,
+    "overall_success": 0.5357142857142857,
+    "pred_exec_ok": 0.9104477611940298,
+    "retail_success": 0.5194805194805194,
+    "retail_tool_em": 0.5584415584415584,
+    "summary": "data/processed/closed_loop/replan_exec_llama32_3b_retrieval_aug_executor_compact_v4.test.state_grounded_v4.summary.json",
+    "tag": "llama32_3b_retrieval_aug_executor_compact_v4",
+    "tool_em": 0.5571428571428572
+  }
+]

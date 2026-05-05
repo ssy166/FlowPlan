@@ -1,0 +1,25 @@
+{
+  "data_source": "rlla_tooluse_benchmark",
+  "format": "toolrl_benchmark_rlhf_v1",
+  "input_dir": "data/processed/fm_replan_sft_next",
+  "splits": {
+    "dev": {
+      "path": [
+        "data/processed/toolrl_benchmark_replan_smoke/dev.jsonl"
+      ],
+      "rows": 8
+    },
+    "test": {
+      "path": [
+        "data/processed/toolrl_benchmark_replan_smoke/test.jsonl"
+      ],
+      "rows": 8
+    },
+    "train": {
+      "path": [
+        "data/processed/toolrl_benchmark_replan_smoke/train.jsonl"
+      ],
+      "rows": 16
+    }
+  }
+}

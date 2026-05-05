@@ -1,0 +1,79 @@
+{
+  "by_domain": {
+    "retail": {
+      "action_rows": 74,
+      "action_success": 0.6486486486486487,
+      "action_tool_exact_match": 0.7567567567567568,
+      "argument_key_precision": 0.7757575757575758,
+      "argument_key_recall": 0.649746192893401,
+      "argument_value_exact_match": 0.5431472081218274,
+      "count": 77,
+      "next_action_success": 0.6493506493506493,
+      "predicted_action_count": 73,
+      "predicted_action_execution_ok": 0.821917808219178,
+      "replay_execution_ok": 0.7402597402597403,
+      "stop_exact_match": 0.961038961038961,
+      "stop_rows": 3,
+      "stop_success": 0.6666666666666666,
+      "tool_exact_match": 0.7532467532467533
+    },
+    "telecom": {
+      "action_rows": 28,
+      "action_success": 1.0,
+      "action_tool_exact_match": 1.0,
+      "argument_key_precision": 1.0,
+      "argument_key_recall": 1.0,
+      "argument_value_exact_match": 1.0,
+      "count": 63,
+      "next_action_success": 1.0,
+      "predicted_action_count": 28,
+      "predicted_action_execution_ok": 1.0,
+      "replay_execution_ok": 1.0,
+      "stop_exact_match": 1.0,
+      "stop_rows": 35,
+      "stop_success": 1.0,
+      "tool_exact_match": 1.0
+    }
+  },
+  "by_prediction_type": {
+    "model_sft_replan_next_mixed_retail_gold_v2_compact_lora_full2048_3gpu": {
+      "action_rows": 102,
+      "action_success": 0.7450980392156863,
+      "action_tool_exact_match": 0.8235294117647058,
+      "argument_key_precision": 0.832579185520362,
+      "argument_key_recall": 0.7272727272727273,
+      "argument_value_exact_match": 0.6442687747035574,
+      "count": 140,
+      "next_action_success": 0.8071428571428572,
+      "predicted_action_count": 101,
+      "predicted_action_execution_ok": 0.8712871287128713,
+      "replay_execution_ok": 0.8571428571428571,
+      "stop_exact_match": 0.9785714285714285,
+      "stop_rows": 38,
+      "stop_success": 0.9736842105263158,
+      "tool_exact_match": 0.8642857142857143
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next_mixed_retail_gold_v2_compact/test.jsonl",
+  "domain": "all",
+  "limit": 0,
+  "overall": {
+    "action_rows": 102,
+    "action_success": 0.7450980392156863,
+    "action_tool_exact_match": 0.8235294117647058,
+    "argument_key_precision": 0.832579185520362,
+    "argument_key_recall": 0.7272727272727273,
+    "argument_value_exact_match": 0.6442687747035574,
+    "count": 140,
+    "next_action_success": 0.8071428571428572,
+    "predicted_action_count": 101,
+    "predicted_action_execution_ok": 0.8712871287128713,
+    "replay_execution_ok": 0.8571428571428571,
+    "stop_exact_match": 0.9785714285714285,
+    "stop_rows": 38,
+    "stop_success": 0.9736842105263158,
+    "tool_exact_match": 0.8642857142857143
+  },
+  "pred": "data/processed/predictions/sft_replan_next_mixed_retail_gold_v2_compact_lora_full2048_3gpu.test.state_grounded_v2.jsonl",
+  "result_grounding": true
+}

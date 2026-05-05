@@ -1,0 +1,13 @@
+torch
+transformers
+accelerate
+peft
+numpy
+pandas
+pyarrow
+scikit-learn
+pyyaml
+tqdm
+jsonlines
+loguru
+matplotlib

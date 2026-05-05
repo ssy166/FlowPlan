@@ -1,0 +1,70 @@
+{
+  "adapter_dir": "<project_root>/outputs/toolrl_lora_grpo/qwen7b_full3gpu/actor/global_step_100",
+  "by_domain": {
+    "retail": {
+      "argument_task_count": 17,
+      "avg_argument_key_precision": 0.1875,
+      "avg_argument_key_recall": 0.13725490196078433,
+      "avg_argument_value_exact_match": 0.11764705882352941,
+      "avg_gold_tool_count": 1.0,
+      "avg_predicted_tool_count": 0.9411764705882353,
+      "avg_tool_edit_distance": 0.8235294117647058,
+      "count": 17,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 0.17647058823529413,
+      "valid_available_tool_rate": 0.9411764705882353
+    },
+    "telecom": {
+      "argument_task_count": 38,
+      "avg_argument_key_precision": 1.0,
+      "avg_argument_key_recall": 1.0,
+      "avg_argument_value_exact_match": 1.0,
+      "avg_gold_tool_count": 0.5588235294117647,
+      "avg_predicted_tool_count": 0.7941176470588235,
+      "avg_tool_edit_distance": 0.7941176470588235,
+      "count": 68,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.7647058823529411,
+      "tool_exact_match": 0.20588235294117646,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "by_source": {
+    "tau2": {
+      "argument_task_count": 55,
+      "avg_argument_key_precision": 0.7592592592592593,
+      "avg_argument_key_recall": 0.7333333333333334,
+      "avg_argument_value_exact_match": 0.7272727272727273,
+      "avg_gold_tool_count": 0.6470588235294118,
+      "avg_predicted_tool_count": 0.8235294117647058,
+      "avg_tool_edit_distance": 0.8,
+      "count": 85,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.8117647058823529,
+      "tool_exact_match": 0.2,
+      "valid_available_tool_rate": 0.9882352941176471
+    }
+  },
+  "data": "data/processed/fm_replan_sft_next/dev.jsonl",
+  "limit": 0,
+  "model_name": "toolrl_lora_grpo_qwen7b_step100",
+  "overall": {
+    "argument_task_count": 55,
+    "avg_argument_key_precision": 0.7592592592592593,
+    "avg_argument_key_recall": 0.7333333333333334,
+    "avg_argument_value_exact_match": 0.7272727272727273,
+    "avg_gold_tool_count": 0.6470588235294118,
+    "avg_predicted_tool_count": 0.8235294117647058,
+    "avg_tool_edit_distance": 0.8,
+    "count": 85,
+    "json_parse_rate": 1.0,
+    "schema_action_rate": 1.0,
+    "stop_exact_match": 0.8117647058823529,
+    "tool_exact_match": 0.2,
+    "valid_available_tool_rate": 0.9882352941176471
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "counts": {
+    "final_action_counts": {
+      "calculate": 3,
+      "cancel_pending_order": 10,
+      "exchange_delivered_order_items": 26,
+      "get_order_details": 5,
+      "get_product_details": 1,
+      "modify_pending_order_address": 3,
+      "modify_pending_order_items": 29,
+      "modify_pending_order_payment": 1,
+      "modify_user_address": 6,
+      "return_delivered_order_items": 24,
+      "transfer_to_human_agents": 4
+    },
+    "gold_action_counts": {
+      "calculate": 13,
+      "cancel_pending_order": 25,
+      "exchange_delivered_order_items": 35,
+      "find_user_id_by_email": 14,
+      "find_user_id_by_name_zip": 61,
+      "get_item_details": 3,
+      "get_order_details": 168,
+      "get_product_details": 54,
+      "get_user_details": 57,
+      "modify_pending_order_address": 24,
+      "modify_pending_order_items": 39,
+      "modify_pending_order_payment": 1,
+      "modify_user_address": 11,
+      "return_delivered_order_items": 41,
+      "transfer_to_human_agents": 4
+    },
+    "items": 591,
+    "lookup_then_operation_tasks": 54,
+    "order_status": {
+      "cancelled": 102,
+      "delivered": 373,
+      "pending": 423,
+      "processed": 102
+    },
+    "orders": 1000,
+    "products": 50,
+    "split_tasks": {
+      "base": 114,
+      "test": 40,
+      "train": 74
+    },
+    "tasks": 114,
+    "tasks_with_operation": 104,
+    "users": 500
+  },
+  "expansion_protocol": [
+    "Keep the original tau2 split ids as provenance; generated variants should inherit source_task_id.",
+    "Generate new replan rows only from executable DB-backed states.",
+    "Preserve gold action arguments from DB/policy-valid tool calls.",
+    "Label whether lookup is incomplete or operation-ready before adding operation hints.",
+    "Evaluate row-level tool EM and real-tool execution success separately."
+  ],
+  "paths": {
+    "data_model": "data/raw/tau2-bench/repo/src/tau2/domains/retail/data_model.py",
+    "db": "data/raw/tau2-bench/repo/data/tau2/domains/retail/db.json",
+    "final_result_dir": "data/raw/tau2-bench/repo/data/tau2/results/final",
+    "policy": "data/raw/tau2-bench/repo/data/tau2/domains/retail/policy.md",
+    "split_tasks": "data/raw/tau2-bench/repo/data/tau2/domains/retail/split_tasks.json",
+    "task_issues_dir": "data/raw/tau2-bench/repo/data/tau2/domains/retail/task_issues",
+    "tasks": "data/raw/tau2-bench/repo/data/tau2/domains/retail/tasks.json",
+    "tools": "data/raw/tau2-bench/repo/src/tau2/domains/retail/tools.py"
+  },
+  "purpose": "Targeted expansion for retail lookup-vs-operation replan failures.",
+  "recommended_expansion_targets": {
+    "lookup_tools": [
+      "find_user_id_by_email",
+      "find_user_id_by_name_zip",
+      "get_item_details",
+      "get_order_details",
+      "get_product_details",
+      "get_user_details",
+      "list_all_product_types"
+    ],
+    "operation_tools": [
+      "cancel_pending_order",
+      "exchange_delivered_order_items",
+      "modify_pending_order_address",
+      "modify_pending_order_items",
+      "modify_pending_order_payment",
+      "modify_user_address",
+      "return_delivered_order_items"
+    ],
+    "state_features": [
+      "resolved_user_id",
+      "resolved_order_id",
+      "resolved_order_status",
+      "resolved_order_item_ids",
+      "resolved_payment_method_ids",
+      "last_successful_lookup_tool",
+      "operation_eligibility"
+    ]
+  },
+  "source_name": "tau2-bench retail",
+  "tool_args": {
+    "calculate": [
+      "expression"
+    ],
+    "cancel_pending_order": [
+      "order_id",
+      "reason"
+    ],
+    "exchange_delivered_order_items": [
+      "order_id",
+      "item_ids",
+      "new_item_ids",
+      "payment_method_id"
+    ],
+    "find_user_id_by_email": [
+      "email"
+    ],
+    "find_user_id_by_name_zip": [
+      "first_name",
+      "last_name",
+      "zip"
+    ],
+    "get_item_details": [
+      "item_id"
+    ],
+    "get_order_details": [
+      "order_id"
+    ],
+    "get_product_details": [
+      "product_id"
+    ],
+    "get_user_details": [
+      "user_id"
+    ],
+    "list_all_product_types": [],
+    "modify_pending_order_address": [
+      "order_id",
+      "address1",
+      "address2",
+      "city",
+      "state",
+      "country",
+      "zip"
+    ],
+    "modify_pending_order_items": [
+      "order_id",
+      "item_ids",
+      "new_item_ids",
+      "payment_method_id"
+    ],
+    "modify_pending_order_payment": [
+      "order_id",
+      "payment_method_id"
+    ],
+    "modify_user_address": [
+      "user_id",
+      "address1",
+      "address2",
+      "city",
+      "state",
+      "country",
+      "zip"
+    ],
+    "return_delivered_order_items": [
+      "order_id",
+      "item_ids",
+      "payment_method_id"
+    ],
+    "transfer_to_human_agents": [
+      "summary"
+    ]
+  }
+}

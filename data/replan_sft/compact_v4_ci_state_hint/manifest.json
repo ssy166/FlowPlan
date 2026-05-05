@@ -1,0 +1,24 @@
+{
+  "hint_dropout": 0.2,
+  "hint_format": "simple",
+  "hint_source": "mixed",
+  "include_stop_hint": false,
+  "oracle_mix_rate": 0.2,
+  "splits": {
+    "dev": {
+      "hinted": 86,
+      "predictions": 206,
+      "rows": 121
+    },
+    "test": {
+      "hinted": 105,
+      "predictions": 223,
+      "rows": 140
+    },
+    "train": {
+      "hinted": 950,
+      "predictions": 3737,
+      "rows": 1987
+    }
+  }
+}

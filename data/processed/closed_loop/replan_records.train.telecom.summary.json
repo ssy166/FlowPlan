@@ -1,0 +1,11 @@
+{
+  "count": 1673,
+  "empty_target_rate": 0.48894202032277345,
+  "execution_failure_rate": 0.034668260609683206,
+  "tool_mismatch_rate": 1.0,
+  "avg_target_remaining_len": 0.5194261805140467,
+  "avg_executed_prefix_len": 1.4889420203227735,
+  "traces": "data\\processed\\closed_loop\\fm_ar_pointer_state_args.train.telecom.executed_traces.jsonl",
+  "out": "data\\processed\\closed_loop\\replan_records.train.telecom.jsonl",
+  "split": "train"
+}

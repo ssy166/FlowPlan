@@ -1,0 +1,75 @@
+{
+  "adapter_dir": "outputs/conditioned_sft/replan_next_mixed_retail_gold_v4_compact_noprior_ci_state_noisy_hint_predonly_lora_full2048_3gpu/final",
+  "by_domain": {
+    "retail": {
+      "argument_task_count": 74,
+      "avg_argument_key_precision": 0.7783687943262411,
+      "avg_argument_key_recall": 0.4591377091377091,
+      "avg_argument_value_exact_match": 0.35569498069498073,
+      "avg_gold_tool_count": 0.961038961038961,
+      "avg_predicted_tool_count": 0.6233766233766234,
+      "avg_tool_edit_distance": 0.5844155844155844,
+      "count": 77,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.6363636363636364,
+      "tool_exact_match": 0.4155844155844156,
+      "valid_available_tool_rate": 1.0
+    },
+    "telecom": {
+      "argument_task_count": 28,
+      "avg_argument_key_precision": 1.0,
+      "avg_argument_key_recall": 1.0,
+      "avg_argument_value_exact_match": 1.0,
+      "avg_gold_tool_count": 0.4444444444444444,
+      "avg_predicted_tool_count": 0.4444444444444444,
+      "avg_tool_edit_distance": 0.0,
+      "count": 63,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 1.0,
+      "tool_exact_match": 1.0,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "by_source": {
+    "tau2": {
+      "argument_task_count": 102,
+      "avg_argument_key_precision": 0.861111111111111,
+      "avg_argument_key_recall": 0.607609710550887,
+      "avg_argument_value_exact_match": 0.532563025210084,
+      "avg_gold_tool_count": 0.7285714285714285,
+      "avg_predicted_tool_count": 0.5428571428571428,
+      "avg_tool_edit_distance": 0.32142857142857145,
+      "count": 140,
+      "json_parse_rate": 1.0,
+      "schema_action_rate": 1.0,
+      "stop_exact_match": 0.8,
+      "tool_exact_match": 0.6785714285714286,
+      "valid_available_tool_rate": 1.0
+    }
+  },
+  "latent_key": null,
+  "limit": 0,
+  "model_name": "sft_replan_next_mixed_retail_gold_v4_compact_noprior_ci_state_noisy_hint_predonly_lora_full2048_3gpu",
+  "overall": {
+    "argument_task_count": 102,
+    "avg_argument_key_precision": 0.861111111111111,
+    "avg_argument_key_recall": 0.607609710550887,
+    "avg_argument_value_exact_match": 0.532563025210084,
+    "avg_gold_tool_count": 0.7285714285714285,
+    "avg_predicted_tool_count": 0.5428571428571428,
+    "avg_tool_edit_distance": 0.32142857142857145,
+    "count": 140,
+    "json_parse_rate": 1.0,
+    "schema_action_rate": 1.0,
+    "stop_exact_match": 0.8,
+    "tool_exact_match": 0.6785714285714286,
+    "valid_available_tool_rate": 1.0
+  },
+  "planner_hint": "none",
+  "planner_hint_predictions": null,
+  "projector_gate": null,
+  "projector_gate_logit": null,
+  "projector_path": null
+}

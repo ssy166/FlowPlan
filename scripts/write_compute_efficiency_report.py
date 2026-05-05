@@ -157,7 +157,35 @@ def fmt(value: Any) -> str:
     return str(value)
 
 
-def write_md(rows: list[dict[str, Any]], out: Path) -> None:
+EXTRA_FIGURE_STEMS = [
+    "success_vs_llm_gpu_steps",
+    "success_vs_end_to_end_gpu_steps",
+    "success_vs_end_to_end_gpu_steps_log",
+    "success_vs_compute_frontier",
+    "success_by_training_stage",
+]
+
+
+def remove_extra_figures(out_dir: Path) -> None:
+    for stem in EXTRA_FIGURE_STEMS:
+        for suffix in [".png", ".pdf"]:
+            path = out_dir / f"{stem}{suffix}"
+            if path.exists():
+                path.unlink()
+
+
+def write_md(rows: list[dict[str, Any]], out: Path, include_extra_figures: bool = False) -> None:
+    figure_lines = ["- `success_vs_training_gpu_steps.png` / `.pdf`"]
+    if include_extra_figures:
+        figure_lines.extend(
+            [
+                "- `success_vs_llm_gpu_steps.png` / `.pdf`",
+                "- `success_vs_end_to_end_gpu_steps.png` / `.pdf`",
+                "- `success_vs_end_to_end_gpu_steps_log.png` / `.pdf`",
+                "- `success_vs_compute_frontier.png` / `.pdf`",
+                "- `success_by_training_stage.png` / `.pdf`",
+            ]
+        )
     lines = [
         "# Compute Efficiency Curves",
         "",
@@ -174,12 +202,7 @@ def write_md(rows: list[dict[str, Any]], out: Path) -> None:
         "",
         "Figures:",
         "",
-        "- `success_vs_training_gpu_steps.png` / `.pdf`",
-        "- `success_vs_llm_gpu_steps.png` / `.pdf`",
-        "- `success_vs_end_to_end_gpu_steps.png` / `.pdf`",
-        "- `success_vs_end_to_end_gpu_steps_log.png` / `.pdf`",
-        "- `success_vs_compute_frontier.png` / `.pdf`",
-        "- `success_by_training_stage.png` / `.pdf`",
+        *figure_lines,
         "",
         "| series | method | executor | n | LLM GPU-steps | end-to-end GPU-steps | overall success | retail success | tool EM | pred exec ok | arg value EM |",
         "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
@@ -576,6 +599,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=str(ROOT))
     parser.add_argument("--out-dir", default=str(ROOT / "data" / "processed" / "compute_efficiency"))
+    parser.add_argument("--include-extra-figures", action="store_true", help="Also write diagnostic compute-efficiency figures.")
     args = parser.parse_args()
 
     root = Path(args.root)
@@ -587,13 +611,16 @@ def main() -> None:
         json.dumps({"points": rows}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    write_md(rows, out_dir / "COMPUTE_EFFICIENCY.md")
+    write_md(rows, out_dir / "COMPUTE_EFFICIENCY.md", include_extra_figures=args.include_extra_figures)
     plot_paper_efficiency(rows, out_dir)
-    plot(rows, out_dir, "llm_gpu_steps", "success_vs_llm_gpu_steps", "LLM GPU-steps")
-    plot(rows, out_dir, "end_to_end_gpu_steps", "success_vs_end_to_end_gpu_steps", "End-to-end GPU-steps")
-    plot_log(rows, out_dir)
-    plot_frontier(rows, out_dir)
-    plot_stage(rows, out_dir)
+    if args.include_extra_figures:
+        plot(rows, out_dir, "llm_gpu_steps", "success_vs_llm_gpu_steps", "LLM GPU-steps")
+        plot(rows, out_dir, "end_to_end_gpu_steps", "success_vs_end_to_end_gpu_steps", "End-to-end GPU-steps")
+        plot_log(rows, out_dir)
+        plot_frontier(rows, out_dir)
+        plot_stage(rows, out_dir)
+    else:
+        remove_extra_figures(out_dir)
     print(f"Wrote {out_dir}")
 
 

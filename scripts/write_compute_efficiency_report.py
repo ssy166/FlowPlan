@@ -87,6 +87,42 @@ POINTS = [
     },
     {
         "series": "ToolRL-Qwen",
+        "method": "ToolRL GRPO step300",
+        "short": "300",
+        "executor": "Qwen2.5-7B",
+        "summary": "data/processed/closed_loop/replan_exec_toolrl_lora_grpo_qwen7b_step300.test.summary.json",
+        "llm_gpu_steps": 900,
+        "end_to_end_gpu_steps": 900,
+        "llm_optimizer_steps": 0,
+        "fm_gpu_steps": 0,
+        "grpo_steps": 300,
+    },
+    {
+        "series": "ToolRL-Qwen",
+        "method": "ToolRL GRPO step400",
+        "short": "400",
+        "executor": "Qwen2.5-7B",
+        "summary": "data/processed/closed_loop/replan_exec_toolrl_lora_grpo_qwen7b_step400.test.summary.json",
+        "llm_gpu_steps": 1200,
+        "end_to_end_gpu_steps": 1200,
+        "llm_optimizer_steps": 0,
+        "fm_gpu_steps": 0,
+        "grpo_steps": 400,
+    },
+    {
+        "series": "ToolRL-Qwen",
+        "method": "ToolRL GRPO step500",
+        "short": "500",
+        "executor": "Qwen2.5-7B",
+        "summary": "data/processed/closed_loop/replan_exec_toolrl_lora_grpo_qwen7b_step500.test.summary.json",
+        "llm_gpu_steps": 1500,
+        "end_to_end_gpu_steps": 1500,
+        "llm_optimizer_steps": 0,
+        "fm_gpu_steps": 0,
+        "grpo_steps": 500,
+    },
+    {
+        "series": "ToolRL-Qwen",
         "method": "ToolRL GRPO step582",
         "short": "582",
         "executor": "Qwen2.5-7B",
@@ -197,7 +233,7 @@ def write_md(rows: list[dict[str, Any]], out: Path, include_extra_figures: bool 
         "",
         "- `LLM GPU-steps` counts only LLM executor optimization steps multiplied by GPU count.",
         "- `End-to-end GPU-steps` adds the FM prior training/rollout cost used by FlowPlanner. The strict selector is deterministic and counted as zero GPU cost.",
-        "- ToolRL points use GRPO checkpoint steps multiplied by 3 GPUs.",
+        "- ToolRL points use GRPO checkpoint steps multiplied by 3 GPUs. Qwen ToolRL is evaluated every 100 GRPO steps through step500, plus the final step582 checkpoint.",
         "- FlowPlanner SFT points use 80 optimizer steps on 3 GPUs; FM prior cost is 280 single-GPU steps.",
         "",
         "Figures:",
@@ -231,7 +267,7 @@ def write_md(rows: list[dict[str, Any]], out: Path, include_extra_figures: bool 
             "- The left panel in each figure reports overall next-action/stop success.",
             "- The right panel reports retail-only success, which is the harder DB-backed operation subset.",
             "- The recommended figure highlights route-level trends instead of exact stage-by-stage training details.",
-            "- FlowPlanner reaches the strongest point after one 3-GPU SFT pass plus the lightweight FM prior. ToolRL improves early but plateaus between step200 and step582 on this split.",
+            "- FlowPlanner reaches the strongest point after one 3-GPU SFT pass plus the lightweight FM prior. ToolRL improves early but plateaus from step200 through step582 on this split.",
         ]
     )
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -318,6 +354,8 @@ def plot_paper_efficiency(rows: list[dict[str, Any]], out_dir: Path) -> None:
             color="#1f6feb",
         )
         for row in toolrl:
+            if row["short"] not in {"100", "200", "582"}:
+                continue
             if row["short"] == "582":
                 text_offset = (-6, -18)
                 ha = "right"

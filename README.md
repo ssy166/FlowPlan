@@ -27,7 +27,6 @@ This directory is a curated open-source snapshot. It intentionally excludes larg
 | item | path |
 |---|---|
 | 📊 Main closed-loop evaluation | `scripts/write_main_experiment_results.py` |
-| ✅ Updated compact-v4 10-row rerun | `docs/MAIN_TABLE_COMPACT_V4_RERUN.md` |
 | 🧪 Component ablations and cost scripts | `scripts/write_ablation_cost_report.py` |
 | 📈 Significance test script | `scripts/write_significance_report.py` |
 | 🔁 Baseline reproducibility | `docs/BASELINE_REPRODUCIBILITY.md` |
@@ -66,7 +65,7 @@ Run commands from the `flowplanner/` repository root.
 |---|---|---|
 | 📦 Regenerate all paper-facing reports and compute figures from local summaries | `bash scripts/reproduce_paper_results.sh reports` | ignored local `results/*.md`, `results/*.json`, `data/processed/compute_efficiency/*` |
 | 📊 Regenerate only the closed-loop main table from local summaries | `bash scripts/reproduce_paper_results.sh main` | ignored local `results/MAIN_EXPERIMENT_RESULTS.md`, `results/MAIN_EXPERIMENT_RESULTS.json` |
-| ✅ Regenerate the updated compact-v4 10-row rerun table | `python scripts/write_compact_v4_main_rerun_report.py --summary-dir data/processed/closed_loop/main_table_rerun_20260505 --out-md docs/MAIN_TABLE_COMPACT_V4_RERUN.md --out-json docs/MAIN_TABLE_COMPACT_V4_RERUN.json` | tracked paper-facing rerun table in `docs/` |
+| ✅ Regenerate the updated compact-v4 10-row rerun table from local summaries | `python scripts/write_compact_v4_main_rerun_report.py --summary-dir data/processed/closed_loop/main_table_rerun_20260505 --out-md results/MAIN_TABLE_COMPACT_V4_RERUN.md --out-json results/MAIN_TABLE_COMPACT_V4_RERUN.json` | ignored local `results/MAIN_TABLE_COMPACT_V4_RERUN.*` |
 | 🧾 Main compact-v4 result table | `python scripts/write_main_experiment_results.py --root . --out-md results/MAIN_EXPERIMENT_RESULTS.md --out-json results/MAIN_EXPERIMENT_RESULTS.json` | Qwen/Llama Raw LLM, SFT, ToolRL, retrieval executor, and FlowPlanner comparisons |
 | 🧪 Main component ablation and training/selector sensitivity | `python scripts/write_ablation_cost_report.py --root . --out-md results/ABLATION_PARAMETER_COSTS.md --out-json results/ABLATION_PARAMETER_COSTS.json` | 4-row component ablation plus appendix sensitivity/cost tables |
 | 📈 Paired row-level uncertainty | `python scripts/write_significance_report.py --root . --out-md results/SIGNIFICANCE_REPORT.md --out-json results/SIGNIFICANCE_REPORT.json` | paired bootstrap CI and sign tests |

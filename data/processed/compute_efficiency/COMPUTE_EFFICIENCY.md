@@ -2,6 +2,8 @@
 
 This report evaluates FlowPlanner and ToolRL checkpoints on the same 83-row executable ToolRL test split. The curves are intended as compute-efficiency diagnostics, not as a replacement for the clean compact-v4 140-row main table.
 
+Recommended paper-facing figure: `success_vs_training_gpu_steps.png` / `.pdf`. It uses a single x-axis, end-to-end training GPU-steps, and shows two panels: overall success and retail success.
+
 Cost conventions:
 
 - `LLM GPU-steps` counts only LLM executor optimization steps multiplied by GPU count.
@@ -11,6 +13,7 @@ Cost conventions:
 
 Figures:
 
+- `success_vs_training_gpu_steps.png` / `.pdf`
 - `success_vs_llm_gpu_steps.png` / `.pdf`
 - `success_vs_end_to_end_gpu_steps.png` / `.pdf`
 - `success_vs_end_to_end_gpu_steps_log.png` / `.pdf`
@@ -32,4 +35,5 @@ Reading guide:
 
 - The left panel in each figure reports overall next-action/stop success.
 - The right panel reports retail-only success, which is the harder DB-backed operation subset.
+- The recommended figure highlights route-level trends instead of exact stage-by-stage training details.
 - FlowPlanner reaches the strongest point after one 3-GPU SFT pass plus the lightweight FM prior. ToolRL improves early but plateaus between step200 and step582 on this split.

@@ -163,6 +163,8 @@ def write_md(rows: list[dict[str, Any]], out: Path) -> None:
         "",
         "This report evaluates FlowPlanner and ToolRL checkpoints on the same 83-row executable ToolRL test split. The curves are intended as compute-efficiency diagnostics, not as a replacement for the clean compact-v4 140-row main table.",
         "",
+        "Recommended paper-facing figure: `success_vs_training_gpu_steps.png` / `.pdf`. It uses a single x-axis, end-to-end training GPU-steps, and shows two panels: overall success and retail success.",
+        "",
         "Cost conventions:",
         "",
         "- `LLM GPU-steps` counts only LLM executor optimization steps multiplied by GPU count.",
@@ -172,6 +174,7 @@ def write_md(rows: list[dict[str, Any]], out: Path) -> None:
         "",
         "Figures:",
         "",
+        "- `success_vs_training_gpu_steps.png` / `.pdf`",
         "- `success_vs_llm_gpu_steps.png` / `.pdf`",
         "- `success_vs_end_to_end_gpu_steps.png` / `.pdf`",
         "- `success_vs_end_to_end_gpu_steps_log.png` / `.pdf`",
@@ -204,10 +207,135 @@ def write_md(rows: list[dict[str, Any]], out: Path) -> None:
             "",
             "- The left panel in each figure reports overall next-action/stop success.",
             "- The right panel reports retail-only success, which is the harder DB-backed operation subset.",
+            "- The recommended figure highlights route-level trends instead of exact stage-by-stage training details.",
             "- FlowPlanner reaches the strongest point after one 3-GPU SFT pass plus the lightweight FM prior. ToolRL improves early but plateaus between step200 and step582 on this split.",
         ]
     )
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def plot_paper_efficiency(rows: list[dict[str, Any]], out_dir: Path) -> None:
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import MultipleLocator
+
+    metrics = [
+        ("overall_success", "Overall success"),
+        ("retail_success", "Retail success"),
+    ]
+    fp_base = next(row for row in rows if row["series"] == "FlowPlanner-Qwen" and row["method"] == "Compact-state SFT w/o FM")
+    fp_final = next(row for row in rows if row["series"] == "FlowPlanner-Qwen" and row["method"] == "State-conditioned FM hint + strict selector")
+    toolrl = [row for row in rows if row["series"] == "ToolRL-Qwen"]
+    toolrl.sort(key=lambda row: row["end_to_end_gpu_steps"])
+
+    fig, axes = plt.subplots(1, 2, figsize=(11.6, 4.25), sharex=True)
+    fig.subplots_adjust(wspace=0.22)
+
+    for ax, (metric_key, title) in zip(axes, metrics):
+        fp_x = [fp_base["end_to_end_gpu_steps"], fp_final["end_to_end_gpu_steps"]]
+        fp_y = [fp_base[metric_key], fp_final[metric_key]]
+        tr_x = [row["end_to_end_gpu_steps"] for row in toolrl]
+        tr_y = [row[metric_key] for row in toolrl]
+
+        ax.plot(
+            tr_x,
+            tr_y,
+            color="#c43c39",
+            marker="s",
+            linewidth=2.2,
+            markersize=6.8,
+            label="ToolRL (SFT + RL)",
+            zorder=2,
+        )
+        ax.plot(
+            fp_x,
+            fp_y,
+            color="#1f6feb",
+            marker="o",
+            linewidth=2.8,
+            markersize=7.5,
+            label="FlowPlanner (FM prior + SFT executor)",
+            zorder=3,
+        )
+        ax.scatter([fp_final["end_to_end_gpu_steps"]], [fp_final[metric_key]], color="#1f6feb", marker="*", s=180, zorder=4)
+
+        ax.annotate(
+            "compact-state SFT",
+            (fp_base["end_to_end_gpu_steps"], fp_base[metric_key]),
+            xytext=(10, -28),
+            textcoords="offset points",
+            fontsize=8.5,
+            ha="left",
+        )
+        ax.annotate(
+            "FlowPlanner",
+            (fp_final["end_to_end_gpu_steps"], fp_final[metric_key]),
+            xytext=(12, 8 if metric_key == "overall_success" else 16),
+            textcoords="offset points",
+            fontsize=9.5,
+            weight="bold",
+            color="#1f6feb",
+        )
+        for row in toolrl:
+            if row["short"] == "582":
+                text_offset = (-6, -18)
+                ha = "right"
+            else:
+                text_offset = (9, -15 if row["short"] == "100" and metric_key == "retail_success" else 8)
+                ha = "left"
+            ax.annotate(
+                row["short"],
+                (row["end_to_end_gpu_steps"], row[metric_key]),
+                xytext=text_offset,
+                textcoords="offset points",
+                fontsize=8.5,
+                color="#8d2725",
+                ha=ha,
+            )
+
+        if metric_key == "overall_success":
+            ax.annotate(
+                "higher success\nwith fewer GPU-steps",
+                xy=(fp_final["end_to_end_gpu_steps"], fp_final[metric_key]),
+                xytext=(930, 0.80),
+                arrowprops={"arrowstyle": "->", "color": "#1f6feb", "lw": 1.2},
+                fontsize=9.2,
+                color="#1f6feb",
+                ha="left",
+            )
+            ax.annotate(
+                "plateau",
+                xy=(toolrl[-1]["end_to_end_gpu_steps"], toolrl[-1][metric_key]),
+                xytext=(1280, 0.62),
+                arrowprops={"arrowstyle": "->", "color": "#c43c39", "lw": 1.0},
+                fontsize=9,
+                color="#8d2725",
+            )
+        else:
+            ax.annotate(
+                "higher retail success\nwith fewer GPU-steps",
+                xy=(fp_final["end_to_end_gpu_steps"], fp_final[metric_key]),
+                xytext=(920, 0.74),
+                arrowprops={"arrowstyle": "->", "color": "#1f6feb", "lw": 1.2},
+                fontsize=9.2,
+                color="#1f6feb",
+                ha="left",
+            )
+
+        ax.set_title(title, fontsize=12, weight="bold")
+        ax.set_xlabel("End-to-end training GPU-steps")
+        ax.set_xlim(0, 1850)
+        ax.set_ylim(0.0, 1.0)
+        ax.xaxis.set_major_locator(MultipleLocator(300))
+        ax.grid(True, linestyle=":", linewidth=0.8, alpha=0.7)
+
+    axes[0].set_ylabel("Success")
+    handles, labels = axes[0].get_legend_handles_labels()
+    axes[0].legend(handles, labels, loc="lower right", fontsize=8.5, frameon=True)
+    fig.suptitle("Compute-efficiency trend on executable tool-use evaluation", fontsize=13.5, weight="bold", y=1.02)
+    fig.tight_layout()
+    fig.savefig(out_dir / "success_vs_training_gpu_steps.png", dpi=240, bbox_inches="tight")
+    fig.savefig(out_dir / "success_vs_training_gpu_steps.pdf", bbox_inches="tight")
+    plt.close(fig)
 
 
 def plot(rows: list[dict[str, Any]], out_dir: Path, x_key: str, stem: str, x_label: str) -> None:
@@ -441,6 +569,7 @@ def main() -> None:
         encoding="utf-8",
     )
     write_md(rows, out_dir / "COMPUTE_EFFICIENCY.md")
+    plot_paper_efficiency(rows, out_dir)
     plot(rows, out_dir, "llm_gpu_steps", "success_vs_llm_gpu_steps", "LLM GPU-steps")
     plot(rows, out_dir, "end_to_end_gpu_steps", "success_vs_end_to_end_gpu_steps", "End-to-end GPU-steps")
     plot_log(rows, out_dir)

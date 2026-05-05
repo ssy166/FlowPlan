@@ -218,6 +218,25 @@ def plot_paper_efficiency(rows: list[dict[str, Any]], out_dir: Path) -> None:
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
+    def smooth_curve(xs: list[float], ys: list[float], samples_per_segment: int = 80) -> tuple[list[float], list[float]]:
+        """Dense monotone interpolation for presentation; markers still show real checkpoints."""
+        if len(xs) != len(ys) or len(xs) < 2:
+            return xs, ys
+        dense_x: list[float] = []
+        dense_y: list[float] = []
+        for i in range(len(xs) - 1):
+            x0, x1 = float(xs[i]), float(xs[i + 1])
+            y0, y1 = float(ys[i]), float(ys[i + 1])
+            n = samples_per_segment
+            for j in range(n):
+                t = j / n
+                eased = t * t * (3.0 - 2.0 * t)
+                dense_x.append(x0 + (x1 - x0) * t)
+                dense_y.append(y0 + (y1 - y0) * eased)
+        dense_x.append(float(xs[-1]))
+        dense_y.append(float(ys[-1]))
+        return dense_x, dense_y
+
     metrics = [
         ("overall_success", "Overall success"),
         ("retail_success", "Retail success"),
@@ -235,27 +254,27 @@ def plot_paper_efficiency(rows: list[dict[str, Any]], out_dir: Path) -> None:
         fp_y = [fp_base[metric_key], fp_final[metric_key]]
         tr_x = [row["end_to_end_gpu_steps"] for row in toolrl]
         tr_y = [row[metric_key] for row in toolrl]
+        fp_curve_x, fp_curve_y = smooth_curve(fp_x, fp_y, samples_per_segment=120)
+        tr_curve_x, tr_curve_y = smooth_curve(tr_x, tr_y, samples_per_segment=90)
 
         ax.plot(
-            tr_x,
-            tr_y,
+            tr_curve_x,
+            tr_curve_y,
             color="#c43c39",
-            marker="s",
-            linewidth=2.2,
-            markersize=6.8,
+            linewidth=2.5,
             label="ToolRL (SFT + RL)",
             zorder=2,
         )
+        ax.scatter(tr_x, tr_y, color="#c43c39", marker="s", s=52, zorder=3)
         ax.plot(
-            fp_x,
-            fp_y,
+            fp_curve_x,
+            fp_curve_y,
             color="#1f6feb",
-            marker="o",
-            linewidth=2.8,
-            markersize=7.5,
+            linewidth=3.0,
             label="FlowPlanner (FM prior + SFT executor)",
             zorder=3,
         )
+        ax.scatter([fp_base["end_to_end_gpu_steps"]], [fp_base[metric_key]], color="#1f6feb", marker="o", s=60, zorder=4)
         ax.scatter([fp_final["end_to_end_gpu_steps"]], [fp_final[metric_key]], color="#1f6feb", marker="*", s=180, zorder=4)
 
         ax.annotate(

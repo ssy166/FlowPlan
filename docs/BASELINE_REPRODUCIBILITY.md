@@ -4,6 +4,14 @@ This document explains how to reproduce FlowPlanner baselines and regenerate pap
 
 The clean snapshot contains lightweight benchmark files, SFT data, and scripts. Generated summary JSONs, prediction files, report markdown, figures, large model checkpoints, LoRA adapters, raw tau2 databases, ToolRL checkpoints, and temporary run files are intentionally not included.
 
+All compact-v4 closed-loop test commands in this document should use:
+
+```bash
+data/replan_sft/compact_v4_ci_state_hint/test.jsonl
+```
+
+This is the updated 140-row test file: 77 retail rows plus 63 telecom rows. Retail metrics are computed on the 77 retail rows inside this same 140-row test set, not on a separate 77-row test file.
+
 ## 1. Setup
 
 Install the Python dependencies:
@@ -12,7 +20,7 @@ Install the Python dependencies:
 pip install -r requirements.txt
 ```
 
-For real executable tau2 evaluation, install tau2-bench separately and make the tau2 data directory visible to the evaluator. The included summary JSONs let you regenerate all paper-facing tables without tau2.
+For real executable tau2 evaluation, install tau2-bench separately and make the tau2 data directory visible to the evaluator. If you only want to regenerate paper-facing tables, place local summary JSONs under the expected ignored `data/processed/` paths and run the report scripts.
 
 Recommended environment variables for full reruns:
 
@@ -179,22 +187,29 @@ Generate from a ToolRL checkpoint:
 ```bash
 python scripts/run_toolrl_lora_generation.py \
   --model-path "$QWEN_MODEL" \
-  --adapter outputs/toolrl_lora_grpo/qwen7b_full3gpu/actor/global_step_582 \
-  --data data/toolrl/toolrl_benchmark_replan/test.jsonl \
-  --out outputs/predictions/toolrl_grpo_step582.test.jsonl \
-  --raw-out outputs/predictions/toolrl_grpo_step582.test.raw.jsonl
+  --adapter-dir outputs/toolrl_lora_grpo/qwen7b_full3gpu/actor/global_step_582 \
+  --data data/replan_sft/compact_v4_ci_state_hint/test.jsonl \
+  --tools data/benchmark/tools.jsonl \
+  --out-raw outputs/predictions/toolrl_grpo_step582.test.raw.jsonl \
+  --out-pred outputs/predictions/toolrl_grpo_step582.test.jsonl \
+  --out-details outputs/predictions/toolrl_grpo_step582.test.details.jsonl \
+  --summary-out outputs/predictions/toolrl_grpo_step582.test.generation_summary.json \
+  --model-name toolrl_grpo_step582 \
+  --batch-size 2 \
+  --max-new-tokens 192 \
+  --dtype bf16
 ```
 
 Ground and evaluate:
 
 ```bash
 python scripts/ground_replan_predictions.py \
-  --data data/toolrl/toolrl_benchmark_replan/test.jsonl \
+  --data data/replan_sft/compact_v4_ci_state_hint/test.jsonl \
   --pred outputs/predictions/toolrl_grpo_step582.test.jsonl \
   --out outputs/predictions/toolrl_grpo_step582.test.state_grounded_v4.jsonl
 
 python scripts/evaluate_replan_execution.py \
-  --data data/toolrl/toolrl_benchmark_replan/test.jsonl \
+  --data data/replan_sft/compact_v4_ci_state_hint/test.jsonl \
   --pred outputs/predictions/toolrl_grpo_step582.test.state_grounded_v4.jsonl \
   --out-details outputs/closed_loop/toolrl_grpo_step582.test.details.jsonl \
   --summary-out outputs/closed_loop/toolrl_grpo_step582.test.summary.json \

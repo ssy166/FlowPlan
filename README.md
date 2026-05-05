@@ -65,7 +65,7 @@ Run commands from the `flowplanner/` repository root.
 |---|---|---|
 | 📦 Regenerate all paper-facing reports and compute figures from local summaries | `bash scripts/reproduce_paper_results.sh reports` | ignored local `results/*.md`, `results/*.json`, `data/processed/compute_efficiency/*` |
 | 📊 Regenerate only the closed-loop main table from local summaries | `bash scripts/reproduce_paper_results.sh main` | ignored local `results/MAIN_EXPERIMENT_RESULTS.md`, `results/MAIN_EXPERIMENT_RESULTS.json` |
-| ✅ Regenerate the updated compact-v4 10-row rerun table from local summaries | `python scripts/write_compact_v4_main_rerun_report.py --summary-dir data/processed/closed_loop/main_table_rerun_20260505 --out-md results/MAIN_TABLE_COMPACT_V4_RERUN.md --out-json results/MAIN_TABLE_COMPACT_V4_RERUN.json` | ignored local `results/MAIN_TABLE_COMPACT_V4_RERUN.*` |
+| ✅ Regenerate the updated compact-v4 10-row rerun table from local summaries | `bash scripts/reproduce_paper_results.sh rerun-main` | ignored local `results/MAIN_TABLE_COMPACT_V4_RERUN.*` |
 | 🧾 Main compact-v4 result table | `python scripts/write_main_experiment_results.py --root . --out-md results/MAIN_EXPERIMENT_RESULTS.md --out-json results/MAIN_EXPERIMENT_RESULTS.json` | Qwen/Llama Raw LLM, SFT, ToolRL, retrieval executor, and FlowPlanner comparisons |
 | 🧪 Main component ablation and training/selector sensitivity | `python scripts/write_ablation_cost_report.py --root . --out-md results/ABLATION_PARAMETER_COSTS.md --out-json results/ABLATION_PARAMETER_COSTS.json` | 4-row component ablation plus appendix sensitivity/cost tables |
 | 📈 Paired row-level uncertainty | `python scripts/write_significance_report.py --root . --out-md results/SIGNIFICANCE_REPORT.md --out-json results/SIGNIFICANCE_REPORT.json` | paired bootstrap CI and sign tests |
@@ -88,9 +88,9 @@ Core benchmark files:
 
 Main replan SFT data:
 
-- `data/replan_sft/compact_v4_ci_state_hint/train.jsonl`
-- `data/replan_sft/compact_v4_ci_state_hint/dev.jsonl`
-- `data/replan_sft/compact_v4_ci_state_hint/test.jsonl`
+- `data/replan_sft/compact_v4_ci_state_hint/train.jsonl` (1,987 rows)
+- `data/replan_sft/compact_v4_ci_state_hint/dev.jsonl` (121 rows)
+- `data/replan_sft/compact_v4_ci_state_hint/test.jsonl` (140 rows: 77 retail + 63 telecom)
 
 The compact-v4 data removes oracle `remaining_prior_tool_names` and uses feedback-conditioned compact state plus FM text/state hints.
 

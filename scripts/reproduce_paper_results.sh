@@ -53,8 +53,15 @@ case "$MODE" in
       --out-md results/MAIN_EXPERIMENT_RESULTS.md \
       --out-json results/MAIN_EXPERIMENT_RESULTS.json
     ;;
+  rerun-main)
+    mkdir -p results
+    python scripts/write_compact_v4_main_rerun_report.py \
+      --summary-dir data/processed/closed_loop/main_table_rerun_20260505 \
+      --out-md results/MAIN_TABLE_COMPACT_V4_RERUN.md \
+      --out-json results/MAIN_TABLE_COMPACT_V4_RERUN.json
+    ;;
   *)
-    echo "Usage: bash scripts/reproduce_paper_results.sh [reports|compute|main]" >&2
+    echo "Usage: bash scripts/reproduce_paper_results.sh [reports|compute|main|rerun-main]" >&2
     exit 2
     ;;
 esac

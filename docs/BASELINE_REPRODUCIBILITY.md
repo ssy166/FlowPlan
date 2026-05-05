@@ -1,8 +1,8 @@
 # Baseline Reproducibility
 
-This document explains how to reproduce the paper-facing FlowPlanner tables, baseline summaries, and compute-efficiency figures from the open-source snapshot.
+This document explains how to reproduce FlowPlanner baselines and regenerate paper-facing tables from local evaluation outputs.
 
-The snapshot contains lightweight benchmark files, SFT data, summary JSONs, and all scripts needed to regenerate reports. Large model checkpoints, LoRA adapters, raw tau2 databases, ToolRL checkpoints, and temporary run files are intentionally not included.
+The clean snapshot contains lightweight benchmark files, SFT data, and scripts. Generated summary JSONs, prediction files, report markdown, figures, large model checkpoints, LoRA adapters, raw tau2 databases, ToolRL checkpoints, and temporary run files are intentionally not included.
 
 ## 1. Setup
 
@@ -23,9 +23,9 @@ export LLAMA32_MODEL=/path/to/Llama-3.2-3B-Instruct
 export TAU2_DATA_DIR=/path/to/tau2-bench/repo/data
 ```
 
-## 2. Regenerate Paper Reports From Included Summaries
+## 2. Regenerate Paper Reports From Local Summaries
 
-These commands do not require model checkpoints.
+These commands expect evaluation summaries from local runs under `data/processed/` or compatible paths. The output directory `results/` is ignored by Git.
 
 ```bash
 bash scripts/reproduce_paper_results.sh reports
@@ -54,7 +54,7 @@ python scripts/write_compute_efficiency_report.py \
   --out-dir data/processed/compute_efficiency
 ```
 
-Main outputs:
+Main local outputs:
 
 - `results/MAIN_EXPERIMENT_RESULTS.md`
 - `results/RAW_RETRIEVAL_BASELINE_RESULTS.md`
@@ -70,7 +70,7 @@ Main outputs:
 
 Purpose: direct-prompt baseline without benchmark SFT/RL.
 
-Artifacts included:
+Expected summary artifacts after local evaluation:
 
 - `data/processed/closed_loop/replan_exec_qwen25_7b_raw_llm_direct_compact_v4.test.state_grounded_v4.summary.json`
 - `data/processed/closed_loop/replan_exec_llama32_3b_raw_llm_direct_compact_v4.test.state_grounded_v4.summary.json`
@@ -118,7 +118,7 @@ If `compact_v4_noprior/` is not present in the lightweight snapshot, rebuild it 
 
 Purpose: test whether FM prior can be replaced by a nearest-row retrieved prior.
 
-Artifacts included:
+Expected summary artifacts after local evaluation:
 
 - `results/RAW_RETRIEVAL_BASELINE_RESULTS.md`
 - `data/processed/closed_loop/replan_exec_qwen25_7b_retrieval_aug_executor_compact_v4.test.state_grounded_v4.summary.json`
@@ -201,7 +201,7 @@ python scripts/evaluate_replan_execution.py \
   --result-grounding
 ```
 
-Included ToolRL summaries:
+ToolRL summaries produced by the reported runs:
 
 - Qwen step100 / step200 / step582
 - Llama-3.2-3B step100

@@ -31,20 +31,14 @@ Each row is a chat-style SFT sample whose assistant target is a strict JSON next
 
 The original full ToolRL parquet files and model checkpoints are intentionally not included.
 
-## Evaluation Summaries
+## Generated Artifacts
 
-`eval_summaries/` contains compact JSON summaries used by the report scripts. Full prediction JSONL files and long traces are omitted from this open-source snapshot.
+Generated result summaries, prediction files, report markdown, and compute-efficiency figures are intentionally not tracked in the clean release.
 
-## Compatibility Copy
+Local experiment runs may create:
 
-`processed/` mirrors the original experiment path convention for report scripts:
+- `data/processed/`
+- `data/eval_summaries/`
+- `results/`
 
-- `processed/closed_loop/`
-- `processed/predictions/`
-- `processed/task_splits/`
-- `processed/compute_efficiency/`
-- top-level report and benchmark files
-
-This is intentionally a lightweight summary copy, not the full working `data/processed` tree.
-
-`processed/compute_efficiency/` contains the source JSON and generated PNG/PDF figures for the ToolRL-vs-FlowPlanner compute-efficiency comparison.
+These paths are ignored by Git.

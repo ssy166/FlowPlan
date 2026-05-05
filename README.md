@@ -26,12 +26,12 @@ This directory is a curated open-source snapshot. It intentionally excludes larg
 
 | item | path |
 |---|---|
-| 📊 Main closed-loop results | `bash scripts/reproduce_paper_results.sh main` |
-| 🧪 Component ablations and cost | `bash scripts/reproduce_paper_results.sh reports` |
-| 📈 Significance tests | `bash scripts/reproduce_paper_results.sh reports` |
+| 📊 Main closed-loop evaluation | `scripts/write_main_experiment_results.py` |
+| 🧪 Component ablations and cost scripts | `scripts/write_ablation_cost_report.py` |
+| 📈 Significance test script | `scripts/write_significance_report.py` |
 | 🔁 Baseline reproducibility | `docs/BASELINE_REPRODUCIBILITY.md` |
 | 🗂️ Baseline result index | `docs/BASELINE_REPRODUCIBILITY.md` |
-| ⚡ Compute-efficiency figures | `data/processed/compute_efficiency/COMPUTE_EFFICIENCY.md` |
+| ⚡ Compute-efficiency figure script | `scripts/write_compute_efficiency_report.py` |
 
 ## 🧱 Layout
 
@@ -42,28 +42,20 @@ flowplanner/
   data/benchmark/                  Processed benchmark files: tools, tasks, gold plans, source manifests
   data/replan_sft/                 Compact-v4 feedback-conditioned SFT data
   data/toolrl/                     ToolRL-format smoke data
-  data/eval_summaries/             Summary JSONs needed to regenerate result tables
-  data/processed/                  Compatibility copy used by report scripts
   docs/                            Reproducibility notes
 ```
 
 ## 📊 Main Results
 
-Generated paper-facing reports are written to `results/` by:
+Generated paper-facing reports are written to a local, ignored `results/` directory by:
 
 ```bash
 bash scripts/reproduce_paper_results.sh reports
 ```
 
-The clean release does not track the generated `results/` directory. The summary JSON/MD files needed to regenerate the main tables are kept under `data/processed/`.
+The clean release does not track generated result artifacts such as `results/`, `data/processed/`, or `data/eval_summaries/`. If you have evaluation summary JSONs from an experiment run, place them under the expected local paths and run the report scripts.
 
-Headline compact-v4 closed-loop test result:
-
-| method | overall success | retail success | retail tool EM | arg value EM |
-|---|---:|---:|---:|---:|
-| no-prior SFT | 0.6571 | 0.3766 | 0.4026 | 0.4387 |
-| FM `c_i + compact state` SFT | 0.7357 | 0.5195 | 0.5325 | 0.5613 |
-| FlowPlanner final selector | 0.7643 | 0.5714 | 0.5844 | 0.5929 |
+Paper result artifacts are intentionally kept outside this clean code/data release.
 
 ## 🚀 Main Experiment Entry Points
 
@@ -71,8 +63,8 @@ Run commands from the `flowplanner/` repository root.
 
 | goal | command or entry file | primary outputs |
 |---|---|---|
-| 📦 Regenerate all paper-facing reports and compute figures | `bash scripts/reproduce_paper_results.sh reports` | `results/*.md`, `results/*.json`, `data/processed/compute_efficiency/*` |
-| 📊 Regenerate only the closed-loop main table | `bash scripts/reproduce_paper_results.sh main` | `results/MAIN_EXPERIMENT_RESULTS.md`, `results/MAIN_EXPERIMENT_RESULTS.json` |
+| 📦 Regenerate all paper-facing reports and compute figures from local summaries | `bash scripts/reproduce_paper_results.sh reports` | ignored local `results/*.md`, `results/*.json`, `data/processed/compute_efficiency/*` |
+| 📊 Regenerate only the closed-loop main table from local summaries | `bash scripts/reproduce_paper_results.sh main` | ignored local `results/MAIN_EXPERIMENT_RESULTS.md`, `results/MAIN_EXPERIMENT_RESULTS.json` |
 | 🧾 Main compact-v4 result table | `python scripts/write_main_experiment_results.py --root . --out-md results/MAIN_EXPERIMENT_RESULTS.md --out-json results/MAIN_EXPERIMENT_RESULTS.json` | Qwen/Llama Raw LLM, SFT, ToolRL, retrieval executor, and FlowPlanner comparisons |
 | 🧪 Main component ablation and training/selector sensitivity | `python scripts/write_ablation_cost_report.py --root . --out-md results/ABLATION_PARAMETER_COSTS.md --out-json results/ABLATION_PARAMETER_COSTS.json` | 4-row component ablation plus appendix sensitivity/cost tables |
 | 📈 Paired row-level uncertainty | `python scripts/write_significance_report.py --root . --out-md results/SIGNIFICANCE_REPORT.md --out-json results/SIGNIFICANCE_REPORT.json` | paired bootstrap CI and sign tests |
@@ -103,7 +95,7 @@ The compact-v4 data removes oracle `remaining_prior_tool_names` and uses feedbac
 
 ## 🛠️ Common Commands
 
-Regenerate all paper-facing reports and compute-efficiency figures from included summary files:
+Regenerate paper-facing reports and compute-efficiency figures after local evaluation summaries have been produced:
 
 ```bash
 bash scripts/reproduce_paper_results.sh reports

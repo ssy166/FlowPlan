@@ -29,6 +29,10 @@ The scripts are grouped by role rather than by package module.
 - `train_fm_prefix_sft.py`
 - `run_fm_prefix_sft_generation.py`
 - `convert_sft_predictions.py`
+- `run_test500_experiment.ps1`
+- `build_test500_eval_pack.py`
+- `evaluate_test500_predictions.py`
+- `audit_test500.py`
 
 ## Grounding And Closed-Loop Evaluation
 

@@ -1,0 +1,31 @@
+{
+  "construction_notes": [
+    "Same-domain tau2 retail+telecom test rows only.",
+    "Preserves the legacy telecom replan rows available locally.",
+    "Retail rows are rebuilt from tau2 test workflow gold prefixes and terminal stop states because the exact legacy 77-row retail artifact was not present locally.",
+    "Targets are next-action/stop only; each assistant target has zero or one action."
+  ],
+  "counts": {
+    "domains": {
+      "retail": 105,
+      "telecom": 395
+    },
+    "source_kinds": {
+      "legacy_telecom_replan": 63,
+      "retail_gold_prefix": 85,
+      "retail_gold_terminal": 20,
+      "telecom_gold_prefix": 262,
+      "telecom_gold_terminal": 70
+    },
+    "stop_by_domain": {
+      "retail": 20,
+      "telecom": 105
+    },
+    "stop_total": 125,
+    "unique_tasks": 331
+  },
+  "format": "test500_chat_sft_v1",
+  "path": "data\\replan_sft\\test500\\test.jsonl",
+  "rows": 500,
+  "source_row_level": "test.jsonl"
+}

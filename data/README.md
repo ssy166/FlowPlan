@@ -25,6 +25,14 @@ It contains:
 
 Each row is a chat-style SFT sample whose assistant target is a strict JSON next-action or stop decision.
 
+`replan_sft/test500/` is an expanded same-domain tau2 retail/telecom test set for reviewer-response evaluation:
+
+- `test.jsonl`: 500 chat-style replan SFT rows.
+- `manifest.json`: construction notes and count summary.
+- `model_eval_pack.jsonl`: derived prompt pack for `scripts/run_toolrl_inference.py`.
+
+The split has 105 retail rows and 395 telecom rows. It keeps the legacy telecom replan rows available locally and expands with tau2 test-set gold-prefix and terminal stop states. The retail part is rebuilt from tau2 retail test workflows because the exact legacy 77-row retail artifact was not present locally.
+
 ## ToolRL
 
 `toolrl/toolrl_benchmark_replan_smoke/` is a small JSONL smoke pack for validating the ToolRL data/reward bridge.
@@ -40,5 +48,6 @@ Local experiment runs may create:
 - `data/processed/`
 - `data/eval_summaries/`
 - `results/`
+- `outputs/`
 
 These paths are ignored by Git.

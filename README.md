@@ -13,6 +13,8 @@
 
 FlowPlanner is a benchmark and method package for **feedback-conditioned executable tool use**. It studies how a noisy continuous planning prior can guide an LLM executor while structured grounding keeps tool calls valid.
 
+In short, the project turns tool-use tasks into compact replan states, trains/evaluates an LLM executor that emits the next JSON tool call or a stop decision, and measures whether the predicted action can be grounded and executed correctly.
+
 The current release focuses on a clean compact-v4 replan setting:
 
 - 🧭 A flow-matching (FM) planning prior provides a state-conditioned planning signal.
@@ -91,8 +93,11 @@ Main replan SFT data:
 - `data/replan_sft/compact_v4_ci_state_hint/train.jsonl` (1,987 rows)
 - `data/replan_sft/compact_v4_ci_state_hint/dev.jsonl` (121 rows)
 - `data/replan_sft/compact_v4_ci_state_hint/test.jsonl` (140 rows: 77 retail + 63 telecom)
+- `data/replan_sft/test500/test.jsonl` (500 same-domain tau2 retail/telecom rows)
 
 The compact-v4 data removes oracle `remaining_prior_tool_names` and uses feedback-conditioned compact state plus FM text/state hints.
+
+`test500` is an expanded reviewer-response evaluation split in the same chat-style replan SFT format. It contains 105 retail rows and 395 telecom rows. The construction keeps the available legacy telecom replan rows and expands with tau2 test-set gold-prefix and terminal stop states. The exact legacy compact-v4 retail artifact was not present locally, so the retail portion is rebuilt from tau2 retail test workflows rather than byte-for-byte copied from the 140-row split.
 
 ## 🛠️ Common Commands
 
@@ -111,6 +116,23 @@ python scripts/build_replan_baseline_predictions.py \
   --data-dir data/replan_sft/compact_v4_ci_state_hint \
   --out-dir outputs/predictions/replan_light_baselines_compact_v4
 ```
+
+Audit and run the expanded `test500` evaluation:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\run_test500_experiment.ps1
+
+powershell -ExecutionPolicy Bypass -File scripts\run_test500_experiment.ps1 `
+  -ModelPath <hf_model_or_checkpoint> `
+  -ModelName <name>
+
+powershell -ExecutionPolicy Bypass -File scripts\run_test500_experiment.ps1 `
+  -ModelPath <base_model> `
+  -AdapterDir <lora_adapter_dir> `
+  -ModelName <name>
+```
+
+The first command only audits the dataset and rebuilds `data/replan_sft/test500/model_eval_pack.jsonl`. The second runs a generic Hugging Face causal LM through `run_toolrl_inference.py`. The third runs a LoRA adapter through `run_toolrl_lora_generation.py`. Predictions and static row-level metrics are written under ignored `outputs/test500/`.
 
 Evaluate generated replan predictions with state grounding:
 

@@ -83,6 +83,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Static audit for data/replan_sft/test500.")
     parser.add_argument("--input", default=str(ROOT / "data" / "replan_sft" / "test500" / "test.jsonl"))
     parser.add_argument("--expected-rows", type=int, default=500)
+    parser.add_argument("--expected-format", default="test500_chat_sft_v1")
     args = parser.parse_args()
 
     rows = read_jsonl(args.input)
@@ -112,7 +113,7 @@ def main() -> None:
             continue
         if messages[0].get("role") != "user" or messages[-1].get("role") != "assistant":
             errors.append(f"{row_id}: first/last message roles must be user/assistant")
-        if metadata.get("format") != "test500_chat_sft_v1":
+        if metadata.get("format") != args.expected_format:
             errors.append(f"{row_id}: unexpected metadata format {metadata.get('format')}")
         if metadata.get("source") != "tau2":
             errors.append(f"{row_id}: non-tau2 source {metadata.get('source')}")

@@ -112,13 +112,14 @@ def main() -> None:
     parser.add_argument("--pred", required=True)
     parser.add_argument("--out", default=str(ROOT / "outputs" / "test500" / "eval.json"))
     parser.add_argument("--details", default=str(ROOT / "outputs" / "test500" / "eval_details.jsonl"))
+    parser.add_argument("--format-name", default="test500")
     args = parser.parse_args()
 
     gold_rows = read_jsonl(args.gold)
     pred_rows = index_predictions(read_jsonl(args.pred))
     scores = [score_row(row, pred_rows.get(row["id"])) for row in gold_rows]
     report = {
-        "format": "test500_static_eval_v1",
+        "format": f"{args.format_name}_static_eval_v1",
         "gold": args.gold,
         "pred": args.pred,
         "overall": summarize(scores),

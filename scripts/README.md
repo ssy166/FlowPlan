@@ -33,6 +33,8 @@ The scripts are grouped by role rather than by package module.
 - `build_test500_eval_pack.py`
 - `evaluate_test500_predictions.py`
 - `audit_test500.py`
+- `build_test800_row_level.py`
+- `run_test800_experiment.ps1`
 
 ## Grounding And Closed-Loop Evaluation
 

@@ -33,6 +33,14 @@ Each row is a chat-style SFT sample whose assistant target is a strict JSON next
 
 The split has 105 retail rows and 395 telecom rows. It keeps the legacy telecom replan rows available locally and expands with tau2 test-set gold-prefix and terminal stop states. The retail part is rebuilt from tau2 retail test workflows because the exact legacy 77-row retail artifact was not present locally.
 
+`replan_sft/test800/` is the larger same-domain evaluation split:
+
+- `test.jsonl`: 800 chat-style replan SFT rows.
+- `manifest.json`: construction notes and count summary.
+- `model_eval_pack.jsonl`: derived prompt pack for `scripts/run_toolrl_inference.py`.
+
+It has 105 retail rows and 695 telecom rows. Retail is capped by the available tau2 retail test workflow prefix/terminal rows; the added scale comes from sampled tau2 telecom test prefix rows plus terminal stop states.
+
 ## ToolRL
 
 `toolrl/toolrl_benchmark_replan_smoke/` is a small JSONL smoke pack for validating the ToolRL data/reward bridge.

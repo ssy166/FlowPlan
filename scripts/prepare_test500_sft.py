@@ -99,7 +99,7 @@ def user_content(state: dict[str, Any]) -> str:
     )
 
 
-def convert_row(row: dict[str, Any], tools: dict[str, dict[str, Any]], max_desc_chars: int) -> dict[str, Any]:
+def convert_row(row: dict[str, Any], tools: dict[str, dict[str, Any]], max_desc_chars: int, format_name: str) -> dict[str, Any]:
     gold = json.loads(row["gold_tool_call_text"])
     action = normalize_action((gold.get("actions") or [None])[0], tools)
     actions = [] if row.get("stop_target") else ([action] if action else [])
@@ -107,7 +107,7 @@ def convert_row(row: dict[str, Any], tools: dict[str, dict[str, Any]], max_desc_
     metadata = dict(row.get("metadata") or {})
     metadata.update(
         {
-            "format": "test500_chat_sft_v1",
+            "format": f"{format_name}_chat_sft_v1",
             "source": row.get("source"),
             "domain": row.get("domain"),
             "split": row.get("split"),
@@ -129,22 +129,25 @@ def convert_row(row: dict[str, Any], tools: dict[str, dict[str, Any]], max_desc_
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Convert the row-level test500 pack into FlowPlan chat SFT format.")
+    parser = argparse.ArgumentParser(description="Convert a row-level replan pack into FlowPlan chat SFT format.")
     parser.add_argument("--source-row-level", required=True)
     parser.add_argument("--tools", default=str(ROOT / "data" / "benchmark" / "tools.jsonl"))
     parser.add_argument("--out-dir", default=str(ROOT / "data" / "replan_sft" / "test500"))
+    parser.add_argument("--format-name", default="test500")
     parser.add_argument("--max-desc-chars", type=int, default=320)
     args = parser.parse_args()
 
     tools = load_tools(args.tools)
-    rows = [convert_row(row, tools, args.max_desc_chars) for row in read_jsonl(args.source_row_level)]
+    rows = [convert_row(row, tools, args.max_desc_chars, args.format_name) for row in read_jsonl(args.source_row_level)]
     out_dir = Path(args.out_dir)
+    if not out_dir.is_absolute():
+        out_dir = ROOT / out_dir
     write_jsonl(out_dir / "test.jsonl", rows)
     domain_counts = Counter((row.get("metadata") or {}).get("domain") for row in rows)
     source_counts = Counter((row.get("metadata") or {}).get("source_kind") for row in rows)
     stop_counts = Counter((row.get("metadata") or {}).get("domain") for row in rows if (row.get("metadata") or {}).get("stop"))
     manifest = {
-        "format": "test500_chat_sft_v1",
+        "format": f"{args.format_name}_chat_sft_v1",
         "rows": len(rows),
         "path": str((out_dir / "test.jsonl").relative_to(ROOT)),
         "source_row_level": Path(args.source_row_level).name,

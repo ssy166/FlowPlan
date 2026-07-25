@@ -78,6 +78,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build a row-level model eval pack from data/replan_sft/test500.")
     parser.add_argument("--input", default=str(ROOT / "data" / "replan_sft" / "test500" / "test.jsonl"))
     parser.add_argument("--out", default=str(ROOT / "data" / "replan_sft" / "test500" / "model_eval_pack.jsonl"))
+    parser.add_argument("--format-name", default="test500")
     args = parser.parse_args()
 
     rows = []
@@ -92,7 +93,7 @@ def main() -> None:
                 "prompt": user_prompt(row),
                 "available_tool_ids": available_tool_ids(row),
                 "metadata": {
-                    "format": "test500_model_eval_pack_v1",
+                    "format": f"{args.format_name}_model_eval_pack_v1",
                     "original_task_id": metadata.get("task_id"),
                     "record_id": row["id"],
                     "source_kind": metadata.get("source_kind"),
